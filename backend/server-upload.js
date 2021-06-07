@@ -5,6 +5,12 @@ const path = require('path');
 const uuid = require('uuid').v4;
 const app = express();
 const compareFiles = require('./compare-files');
+const fs = require('fs');
+
+const folder = 'uploads';
+if(!fs.existsSync(folder)) {
+  fs.mkdirSync(folder);
+}
 // const db = require('./db');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
