@@ -8,18 +8,8 @@ const compareFiles = require('./compare-files');
 const fs = require('fs');
 
 // const db = require('./db');
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    const { originalname } = file;
-    // or
-    // uuid, or fieldname
-    cb(null, originalname);
-  },
-});
-const upload = multer({ storage }); // or simply { dest: 'uploads/' }
+const upload = multer({ dest: 'uploads' });
+
 app.use(express.static('client'));
 
 app.post('/upload', upload.any('files'), (req, res) => {
@@ -28,7 +18,7 @@ app.post('/upload', upload.any('files'), (req, res) => {
 
 app.get('/compare', function (req, res) {
   const similarity = compareFiles();
-  let text = similarity.bestMatch.target;
+  const text = similarity.bestMatch.target;
   // db.addMatch(text);
 
   res.send(similarity);

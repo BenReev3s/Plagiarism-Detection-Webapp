@@ -10,7 +10,7 @@ function compareFiles() {
     return fs.statSync('uploads/' + y).mtime.getTime() -
     fs.statSync('uploads/' + x).mtime.getTime();
   });
-  console.log(files);
+  // console.log(files);
 
   // sorting files into most recent
 
@@ -37,9 +37,9 @@ function compareFiles() {
   const targetFiles = dataArr;
 
   // the most recent file is compared against the remaining files
-  console.log('The original file: ' + '\n' + original);
+  // console.log('The original file: ' + '\n' + original);
   const similarity = stringSimilarity.findBestMatch(original, targetFiles);
-  console.log(similarity);
+  // console.log(similarity);
   // used to delete all files after
   // deleteFiles(pathArr);
   return similarity;

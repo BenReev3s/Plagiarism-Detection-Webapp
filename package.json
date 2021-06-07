@@ -4,9 +4,8 @@
   "description": "Plagiarism Checker checks files for plagiarism between code",
   "main": "node app.js",
   "scripts": {
-    "watch": "nodemon ./backend/server-upload",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.html"
+    "start": "nodemon ./backend/server-upload"
   },
   "repository": {
     "type": "git",
