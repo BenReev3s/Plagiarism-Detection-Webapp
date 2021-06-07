@@ -3,9 +3,10 @@ After clone or download use "npm i" to download all dependencies
 
 ## How the Plagiarism Checker works?
 
-1. The Plagiarism Checker uses a simple UI giving the user a choice to select files or drop and drag them. Once prompted that the files are uploaded, you can proceed to click check to output the similarity. The user must upload more than 1 file.
+- The Plagiarism Checker uses a simple UI giving the user a choice to select files or drop and drag them
 
-2. The plagairisim checker will take multiple files and compare a file against the rest. It will output the content of the files and show a rating to the right of it stating the similarity. The rating can be from 0-1.
+- A dir(uploads) contains all files uploaded. Files uploaded are given unique id's and resorted so the most recently uploaded file is compared
 
-3. As the files are checked, the files are sent to the Sqlite database. This is so the user can compare newly uplaoded files against previous submissions.
+- The app allows multiple file upload and will compare the most recently uploaded file against the rest of files
 
+- user can uplaod multiple files and then upload a single file after that they want to compare against the rest. The most similar files content is shown on the left of the drop box. A list of the files used in comparison is found below the drop box with a given rating of similarity from 0 - 1
