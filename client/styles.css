@@ -206,11 +206,12 @@ header {
     justify-content: center;
     flex-direction: column;
     margin: 0 auto;
-    max-width: 100px;
+    max-width: 150px;
+    padding: 30px;
 }
 
 td {
-    padding: 40px;
+    padding: 20px;
     max-width: 100%;
     font-size: 20px;
     white-space: pre-wrap;
@@ -224,3 +225,6 @@ h2{
     left: 50%;
 }
 
+th{
+    padding: 30px;
+}

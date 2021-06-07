@@ -104,6 +104,7 @@ async function compareFiles() {
     for (let i = 0; i < ratings.length; i++) {
       const row = document.createElement('tr');
       const target = document.createElement('td');
+      target.style.backgroundColor = '#F5F5F5';
       const target_text = document.createTextNode(ratings[i].target);
       target.appendChild(target_text);
       row.appendChild(target);
@@ -123,8 +124,16 @@ async function compareFiles() {
 
     const rating_text = document.createTextNode(best.rating);
     const rating = document.createElement('td');
+    rating.style.backgroundColor = '#F5F5F5';
     rating.appendChild(rating_text);
     row.appendChild(rating);
+    best_match.appendChild(row);
+
+    const bestIndex = json_response.bestMatchIndex;
+    const best_index = document.createTextNode(bestIndex);
+    const index = document.createElement('td');
+    index.appendChild(best_index);
+    row.appendChild(index);
     best_match.appendChild(row);
   } catch (e) {
     console.log(e);
