@@ -1,51 +1,47 @@
 <!DOCTYPE html>
-<html>
 <head>
 	<meta charset="utf-8">
-	<meta content="IE-edge" http-equiv="X-UA-Compitable">
+	<meta content="IE-edge" http-equiv="x-UA-Compitable">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<link href="styles.css" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" rel="stylesheet">
+	<link rel="https://use.fontawesome.com/release/v5.12.1/css/all.css" rel="stylesheet">
 	<title>Plagiarisim Checker</title>
-	<style media="screen">
-	</style>
+	<style meadia="screen"></style>
 </head>
-<body style="background-color: #dfe3ee;">
-	<header>
-		<h1 class="headerTitle">Plagiarism Checker</h1>
-	</header>
-	<main>
-		
-			<div class="drop-zone">
-				<div class="pic">
-					<i class="fas fa-file-upload"></i>
-				</div>
-				<header id="dropText">
-					Drag and drop file(s) here
-				</header><span>Or</span>
-				 <button class="drop-zone__button" type="button">Select file(s)</button>
-				  <input class="drop-zone__file" id="fileDrag" multiple name="myFiles[]" style="display: none;" type="file">
-				 <button class="drop-zone__submit">Upload</button>
+<body>
+	<div class="container">
+		<header><h1>Plagiarisim Checker</h1></header>
+		<div class="drop-zone">
+			<div class="pic">
+				<i class="fas fa-file-upload"></i>
 			</div>
-		
-		<button class="compare">Check</button>
-		<div class="textContent">
-
+			<h1 id="dropText">Drag and drop files here</h1>
+			<span>Or</span>
+			<button class="drop-zone__button" type="button">Select files</button>
+			<input class="drop-zone__file" type="file" id="fileDrag" multiple name="myFiles[]" style="display: none;" type="file">
+			<button class="drop-zone__submit">Upload</button>
 		</div>
-	</main>
-	<aside>
-		<h1>Code Similarity Report</h1>
-		<h4>File 1 name:</h4>
-		<table class="table">
+		<div class="compare">
+			<button class="compare-button">Check Files</button>
+		</div>
+		<div class="code-report">
+			<table class="table">
+				<tr>
+					<th class="target">Targets</th>
+					<th class="ratings">Ratings</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div>
+		<h2>Best Match</h2>
+		<table class="best-table">
 			<tr>
 				<th>Target</th>
-				<th>Ratings</th>
+				<th>Rating</th>
 			</tr>
-			
 		</table>
-	</aside>
-	<footer style="height: auto;"></footer>
-		
+	</div>
+	<div class="textContent"></div>
+	<script src="./app.js"></script>
 </body>
-<script src="./app.js"></script>
-</html>

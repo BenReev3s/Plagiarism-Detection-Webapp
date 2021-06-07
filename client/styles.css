@@ -1,366 +1,226 @@
-body{
-    @import url('https://fonts.googleapis.com/css2?family=Headland+One&display=swap');
-    
-    
-    line-height: 1.6;
 
-    display: grid;
-    grid-template-rows: 10em 50vh auto 10em;
-    grid-template-columns:75% 25%;
-    grid-template-rows: 10vw 30vw 10vw;
+
+.container{
+    position: relative;
+    width: 100;
+    height: 500px;
+    justify-content: center;
+    margin: 0 auto
 }
 
 header {
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #2288ee;
     color : white;
     grid-column: 1 / span 2;
     font-family: sans-serif;
     width: 100%;
-    padding: 5px 0px 5px 0px;
     height: 100px;
+    margin-bottom: 60px;
+    
 }
 
-
-
-footer{
-    background-color: #2288ee;
-    color : white;
-    grid-column: 1 / span 2;
-    font-family: sans-serif;
-    width: 100%;
-    padding: 5px 0px 5px 0px;
+.drop-text {
+    background-color:white ;
+    font-size: 30px;
+    font-weight: 500;
+    color:  #2288ee;
 }
 
+.drop_zone-box{
+    
+    padding: 30px;
+}
 
-body{
+.drop-zone{
+    border: 2px dashed  #2288ee;
+    height: 500px;
+    width: 900px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin: 0 auto;
+}
+
+.drop-zone span{
+    font-size:  25px;
+    font-weight: 500;
+    color:  #2288ee;
+    font-family: sans-serif;
+    margin: 10px 0 15px 0;
+}
+
+.drop-zone .pic{
+    font-size: 100px;
+    color: #2288ee;
+
+}
+
+.drop-zone span{
+    font-size:  25px;
+    font-weight: 500;
+    color:  #2288ee;
+    font-family: sans-serif;
+    margin: 10px 0 15px 0;
+}
+
+.drop-zone .pic{
+    font-size: 100px;
+    color: #2288ee;
+
+}
+
+.drop-zone__button{
+    -webkit-appearance: none;
+    background:  #2288ee;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 10px 25px;
+    margin-right: 15px;
+    color:white;
+    font: size 1em;
+    font-family: sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 20px;
+    
+}
+
+
+
+.drop-zone--over{
+    border: 2px solid #2288ee;
+    }
+
+.drop-zone__submit{
+    background: #2288ee;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-right: 15px;
+    font: size 1em;
+    font-family: sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 20px;
+    -webkit-appearance: none;
+    margin: 20px 0 15px 0;
+}
+
+.header-title{
+    color: white;
+}
+
+.drop-text{
+    color: #2288ee;
+    font: bold;
+}
+
+.file-submission{
+
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.file-upload__input{
+
+    display: none;
+}
+
+.file-upload__button:active{
+    background: darkblue;
+}
+
+.file-upload__text{
+    max-width: 200px;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.drop-zone__image{
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   overflow: hidden;
+   background-color: gainsboro;
+   background-size: cover;
+   position: relative;
+} 
+
+.drop-zone__image::after{
+    content: attr(data-text);
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: ghostwhite;
+    background: black;
+    font-size: 14px;
+    text-align: center;
+}
+
+.compare{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.compare-button{
+    background: #2288ee;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-right: 15px;
+    font: size 1em;
+    font-family: sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 20px;
+    -webkit-appearance: none;
+    margin: 20px 0 15px 0;
+}
+
+
+
+.code-report{
+    left: 50%;
+}
+
+.table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 100px;
+}
+
+td {
+    padding: 40px;
     max-width: 100%;
-    padding: 1em 0;
-
-}
-
-
-header,
-main,
-aside,
-footer {
-    float: left;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-     ;
-}
-
-.drop-zone header {
-    background-color:#dfe3ee ;
-    font-size: 30px;
-    font-weight: 500;
-    color:  #2288ee;
-}
-
-.drop-zone{
-    border: 2px dashed  #2288ee;
-    height: 500px;
-    width: 700px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.drop-zone span{
-    font-size:  25px;
-    font-weight: 500;
-    color:  #2288ee;
-    font-family: sans-serif;
-    margin: 10px 0 15px 0;
-}
-
-.drop-zone .pic{
-    font-size: 100px;
-    color: #2288ee;
-
-}
-
-.drop-zone span{
-    font-size:  25px;
-    font-weight: 500;
-    color:  #2288ee;
-    font-family: sans-serif;
-    margin: 10px 0 15px 0;
-}
-
-.drop-zone .pic{
-    font-size: 100px;
-    color: #2288ee;
-
-}
-
-.drop-zone__button{
-    -webkit-appearance: none;
-    background:  #2288ee;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    padding: 10px 25px;
-    margin-right: 15px;
-    color:white;
-    font: size 1em;
-    font-family: sans-serif;
-    font-weight: 500;
-    cursor: pointer;
     font-size: 20px;
-    
+    white-space: pre-wrap;
 }
 
-.drop-zone--over{
-    border: 2px solid #2288ee;
-    }
-
-.drop-zone__submit{
-    background: #2288ee;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-right: 15px;
-    font: size 1em;
-    font-family: sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 10px 25px;
-    font-size: 20px;
-    -webkit-appearance: none;
-    margin: 20px 0 15px 0;
+.best-table{
+    max-width: 100px;
 }
 
-.file-submission{
-
-    display: inline-flex;
-    align-items: center;
-    font-size: 15px;
+h2{
+    left: 50%;
 }
-
-.file-upload__input{
-
-    display: none;
-}
-
-
-
-.file-upload__button:active{
-    background: darkblue;
-}
-
-.file-upload__text{
-    max-width: 200px;
-    font-size: 0.95em;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.divider{
-    height: 40px;
-}
-
-
-
-.drop-zone__image{
-   width: 100%;
-   height: 100%;
-   border-radius: 10px;
-   overflow: hidden;
-   background-color: gainsboro;
-   background-size: cover;
-   position: relative;
-} 
-
-.drop-zone__image::after{
-    content: attr(data-text);
-    position:absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5px 0;
-    color: ghostwhite;
-    background: black;
-    font-size: 14px;
-    text-align: center;
-
-
-}
-/*
-.header-title
-    
-
-.footer-title {
-    
-    font-family:Merriweather ;
-    background: 3b5998;
-}
-
-.following{
-    grid-area: following;
-    background: url(https://cdn.wallpapersafari.com/31/2/AvbLiU.jpg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: x-large;
-    margin: 0;
-}
-
-main{
-    grid-area:main;
-}
-
-aside{
-    grid-area: sidebar;
-    background-color: #f7f7f7;
-    
-}
-
-footer{
-    grid-area:footer;
-}
-
-.drop-zone{
-    width: 300px;
-    height: 200px;
-    float: left;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 8px dashed mediumspringgreen
-}
-
-.drop-zone{
-    border: 2px dashed  #2288ee;
-    height: 500px;
-    width: 700px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.drop-zone header {
-    background-color:#dfe3ee ;
-    font-size: 30px;
-    font-weight: 500;
-    color:  #2288ee;
-}
-.drop-zone span{
-    font-size:  25px;
-    font-weight: 500;
-    color:  #2288ee;
-    font-family: sans-serif;
-    margin: 10px 0 15px 0;
-}
-
-.drop-zone .pic{
-    font-size: 100px;
-    color: #2288ee;
-
-}
-
-.drop-zone__button{
-    -webkit-appearance: none;
-    background:  #2288ee;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    padding: 10px 25px;
-    margin-right: 15px;
-    color:white;
-    font: size 1em;
-    font-family: sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    font-size: 20px;
-    
-}
-
-.drop-zone--over{
-    border: 2px solid #2288ee;
-    }
-
-.drop-zone__submit{
-    background: #2288ee;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-right: 15px;
-    font: size 1em;
-    font-family: sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 10px 25px;
-    font-size: 20px;
-    -webkit-appearance: none;
-    margin: 20px 0 15px 0;
-}
-
-.file-submission{
-
-    display: inline-flex;
-    align-items: center;
-    font-size: 15px;
-}
-
-.file-upload__input{
-
-    display: none;
-}
-
-
-
-.file-upload__button:active{
-    background: darkblue;
-}
-
-.file-upload__text{
-    max-width: 200px;
-    font-size: 0.95em;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.divider{
-    height: 40px;
-}
-
-
-
-.drop-zone__image{
-   width: 100%;
-   height: 100%;
-   border-radius: 10px;
-   overflow: hidden;
-   background-color: gainsboro;
-   background-size: cover;
-   position: relative;
-} 
-
-.drop-zone__image::after{
-    content: attr(data-text);
-    position:absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5px 0;
-    color: ghostwhite;
-    background: black;
-    font-size: 14px;
-    text-align: center;
-
-
-}
-
-
-*/
 

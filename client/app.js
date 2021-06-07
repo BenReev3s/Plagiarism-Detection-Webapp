@@ -7,10 +7,11 @@ const button = document.querySelector('.drop-zone__button');
 let file;
 const dragText = document.querySelector('#dropText');
 const inputFile = document.querySelector('.drop-zone__file');
-const compare = document.querySelector('.compare');
+const compare = document.querySelector('.compare-button');
 const submit = document.querySelector('.drop-zone__submit');
 const text = document.querySelector('.textContent');
 const table = document.querySelector('.table');
+const best_match = document.querySelector('.best-table');
 
 // async function managing uploads
 async function uploadFile() {
@@ -107,35 +108,30 @@ async function compareFiles() {
       target.appendChild(target_text);
       row.appendChild(target);
       const rating = document.createElement('td');
+
       const rating_text = document.createTextNode(ratings[i].rating);
       rating.appendChild(rating_text);
       row.appendChild(rating);
       table.appendChild(row);
     }
+    const best = json_response.bestMatch;
+    const row = document.createElement('tr');
+    const target = document.createElement('td');
+    const target_text = document.createTextNode(best.target);
+    target.appendChild(target_text);
+    row.appendChild(target);
+
+    const rating_text = document.createTextNode(best.rating);
+    const rating = document.createElement('td');
+    rating.appendChild(rating_text);
+    row.appendChild(rating);
+    best_match.appendChild(row);
   } catch (e) {
     console.log(e);
   }
 }
 
+
 compare.addEventListener('click', async function () {
   await compareFiles();
 });
-
-// This function will display the files text content
-function showFiles() {
-  for (let i = 0; i < file.length; i++) {
-    const fileType = file[i].type;
-    const validExtensions = ['text/javascript'];
-    if (validExtensions.includes(fileType)) {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        const fileURL = fileReader.result;
-        console.log(fileURL);
-      };
-      fileReader.readAsDataURL(file[i]);
-    } else {
-      alert('Invalid File');
-      dropZone.classList.remove('drop-zone--over');
-    }
-  }
-}
