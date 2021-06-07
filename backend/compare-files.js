@@ -41,21 +41,20 @@ function compareFiles() {
   const similarity = stringSimilarity.findBestMatch(original, targetFiles);
   console.log(similarity);
   // used to delete all files after
-  // deleteFiles(pathArr);
+  deleteFiles(pathArr);
   return similarity;
 }
 
+// function will clear the uploads dir
 function deleteFiles(path) {
   for (let i = 0; i < path.length; i++) {
     fs.unlink(path[i], (err) => {
       if (err) {
         console.error(err);
       }
-
-      // file removed
     });
   }
 }
 // compareFiles();
 
-module.exports = compareFiles;
+module.exports = { compareFiles, deleteFiles };
