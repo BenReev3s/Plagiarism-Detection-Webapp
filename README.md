@@ -1,12 +1,17 @@
-# Plag-Checker
+# Set Up
 After clone or download use "npm i" to download all dependencies
+Use npm start to run the app
+Go to http://localhost:8080
 
 ## How the Plagiarism Checker works?
 
-- The Plagiarism Checker uses a simple UI giving the user a choice to select files or drop and drag them
+- Upload 2 file or more
+- Hit uplaod to uplaod the files to the database
+- Click check so the most recent file is compared against previous files in the database
+- See table below file upload to view the similarity score
 
-- A dir(uploads) contains all files uploaded. Files uploaded are given unique id's and resorted so the most recently uploaded file is compared
-
-- The app allows multiple file upload and will compare the most recently uploaded file against the rest of files
-
-- user can uplaod multiple files and then upload a single file after that they want to compare against the rest. The most similar files content is shown on the left of the drop box. A list of the files used in comparison is found below the drop box with a given rating of similarity from 0 - 1
+  ##NOTE
+  -Files are stored in SQLite database not on disk
+  -The database is created upon initial npm start
+  - To reset simply delete ```plagiarism.db```
+  
