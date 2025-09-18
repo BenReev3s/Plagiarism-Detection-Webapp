@@ -28,7 +28,13 @@ async function compareFiles() {
 
   const [original, ...targetFiles] = contents;
 
-  return stringSimilarity.findBestMatch(original, targetFiles);
+  const result = stringSimilarity.findBestMatch(original, targetFiles);
+
+  // ✅ Add filenames
+  return {
+    ...result,
+    files: filesWithStats.map((f) => path.basename(f.filePath)),
+  };
 }
 
 module.exports = compareFiles;

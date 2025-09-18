@@ -1,146 +1,100 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-sequences */
-const dropZone = document.querySelector('.drop-zone');
-const button = document.querySelector('.drop-zone__button');
-// global variable, will be used in a few functions
-let file;
-const dragText = document.querySelector('#dropText');
-const inputFile = document.querySelector('.drop-zone__file');
-const compare = document.querySelector('.compare-button');
-const submit = document.querySelector('.drop-zone__submit');
-const text = document.querySelector('.textContent');
-const table = document.querySelector('.table');
-const best_match = document.querySelector('.best-table');
+/* ------------ SELECTORS ------------ */
+const dropZone = document.querySelector(".drop-zone");
+const dropText = document.querySelector("#dropText");
 
-// async function managing uploads
+const selectBtn = document.querySelector("#selectFiles");
+const inputFile = document.querySelector(".drop-zone__file");
+const submitBtn = document.querySelector(".drop-zone__submit");
+const compareBtn = document.querySelector(".compare-button");
+
+const comparisonBody = document.querySelector(".table-body");
+const bestMatchBox = document.querySelector("#best-match");
+
+/* ------------ FILE UPLOAD ------------ */
 async function uploadFile() {
-  let return_data = { error: 0, message: '' };
-  for (let i = 0; i < inputFile.files.length; i++) {
-    try {
-    // no file selected
-      if (inputFile.files.length === 0) {
-        throw new Error('No file selected');
-      } else {
-      // formdata
-
-        const data = new FormData();
-        data.append('title', 'Sample Title');
-        data.append('file', inputFile.files[i]);
-
-        // send fetch along with cookies
-        const response = fetch('/upload', {
-          method: 'POST',
-          body: data,
-        });
-
-
-        // server responded with http response != 200
-        if (response.status !== 200) { throw new Error(''); }
-
-        // read json response from server
-        // success response example : {"error":0,"message":""}
-        // error response example : {"error":1,"message":"File type not allowed"}
-        const json_response = await response.json();
-        if (json_response.error === 1) { throw new Error(); }
-      }
-    } catch (e) {
-    // catch rejected Promises and Error objects
-      return_data = { error: 1, message: e.message };
-    }
+  if (!inputFile.files.length) {
+    return { error: 1, message: "No file selected" };
   }
-  return return_data;
-}
 
-
-dropZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  dropZone.classList.add('drop-zone--over');
-  dragText.textContent = 'Release file to uplaod';
-});
-
-dropZone.addEventListener('dragleave', (e) => {
-  e.preventDefault();
-  dropZone.classList.remove('drop-zone--over');
-  dragText.textContent = 'Drag and drop file(s) here';
-});
-
-dropZone.addEventListener('drop', (event) => {
-  event.preventDefault();
-
-  inputFile.files = event.dataTransfer.files;
-  // showFiles();
-});
-
-button.addEventListener('click', () => {
-  inputFile.click();
-});
-
-inputFile.addEventListener('change', function () {
-  file = this.files;
-  // showFiles();
-});
-
-
-submit.addEventListener('click', async function () {
-  const upload = await uploadFile();
-
-  if (upload.error === 0) { alert('Please select a file'); } else if (upload.error === 1) { alert('Files uploaded sucessfuly ' + upload.message); }
-});
-
-
-async function compareFiles() {
   try {
-    const response = await fetch('/compare');
+    for (let i = 0; i < inputFile.files.length; i++) {
+      const data = new FormData();
+      data.append("file", inputFile.files[i]);
 
-    if (!response.ok) { throw new Error('Status code was: ' + response.status); }
+      const response = await fetch("/upload", { method: "POST", body: data });
+      if (!response.ok) throw new Error("Upload failed");
 
-    for (let i = 1; i < table.childNodes.length; i++) {
-      table.removeChild(table.childNodes[i]);
+      await response.json();
     }
-
-    const json_response = await response.json();
-    const ratings = json_response.ratings;
-    for (let i = 0; i < ratings.length; i++) {
-      const row = document.createElement('tr');
-      const target = document.createElement('td');
-      target.style.backgroundColor = '#F5F5F5';
-      const target_text = document.createTextNode(ratings[i].target);
-      target.appendChild(target_text);
-      row.appendChild(target);
-      const rating = document.createElement('td');
-
-      const rating_text = document.createTextNode(ratings[i].rating);
-      rating.appendChild(rating_text);
-      row.appendChild(rating);
-      table.appendChild(row);
-    }
-    const best = json_response.bestMatch;
-    const row = document.createElement('tr');
-    const target = document.createElement('td');
-    const target_text = document.createTextNode(best.target);
-    target.appendChild(target_text);
-    row.appendChild(target);
-
-    const rating_text = document.createTextNode(best.rating);
-    const rating = document.createElement('td');
-    rating.style.backgroundColor = '#F5F5F5';
-    rating.appendChild(rating_text);
-    row.appendChild(rating);
-    best_match.appendChild(row);
-
-    const bestIndex = json_response.bestMatchIndex;
-    const best_index = document.createTextNode(bestIndex);
-    const index = document.createElement('td');
-    index.appendChild(best_index);
-    row.appendChild(index);
-    best_match.appendChild(row);
-  } catch (e) {
-    console.log(e);
+    return { error: 0, message: "Files uploaded successfully" };
+  } catch (err) {
+    return { error: 1, message: err.message };
   }
 }
 
+/* ------------ DRAG & DROP UI ------------ */
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropZone.classList.add("drop-zone--over");
+  dropText.textContent = "Release file to upload";
+});
 
-compare.addEventListener('click', async function () {
+dropZone.addEventListener("dragleave", (e) => {
+  e.preventDefault();
+  dropZone.classList.remove("drop-zone--over");
+  dropText.textContent = "Drag and drop files here";
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.classList.remove("drop-zone--over");
+  inputFile.files = e.dataTransfer.files;
+});
+
+/* ------------ BUTTON EVENTS ------------ */
+selectBtn.addEventListener("click", () => inputFile.click());
+
+submitBtn.addEventListener("click", async () => {
+  const result = await uploadFile();
+  alert(result.message);
+});
+
+compareBtn.addEventListener("click", async () => {
   await compareFiles();
 });
+
+/* ------------ FILE COMPARISON ------------ */
+async function compareFiles() {
+  try {
+    const response = await fetch("/compare");
+    if (!response.ok) throw new Error(`Status: ${response.status}`);
+
+    const { ratings, bestMatch, bestMatchIndex, files } = await response.json();
+
+    // Clear previous results
+    comparisonBody.innerHTML = "";
+    bestMatchBox.innerHTML = "";
+
+    // Build comparison table rows
+    ratings.forEach((r, i) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${files[0]}</td>
+        <td>${files[i + 1]}</td>
+        <td>${(r.rating * 100).toFixed(2)}%</td>
+      `;
+      comparisonBody.appendChild(row);
+    });
+
+    // Best match card
+    bestMatchBox.classList.add("best-match-card");
+    bestMatchBox.innerHTML = `
+      <h3>Best Match</h3>
+      <p><strong>${files[0]}</strong> ↔ <strong>${files[bestMatchIndex + 1]}</strong></p>
+      <p>Similarity: <span style="color:green">${(bestMatch.rating * 100).toFixed(2)}%</span></p>
+    `;
+  } catch (err) {
+    console.error(err);
+    alert("Comparison failed: " + err.message);
+  }
+}
