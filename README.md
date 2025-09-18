@@ -10,8 +10,9 @@ Go to http://localhost:8080
 - Click check so the most recent file is compared against previous files in the database
 - See table below file upload to view the similarity score
 
-  ##NOTE
-  -Files are stored in SQLite database not on disk
-  -The database is created upon initial npm start
-  - To reset simply delete ```plagiarism.db```
+## NOTE
+
+- Files are stored in SQLite database not on disk
+- The database is created upon initial npm start
+- To reset simply delete ```plagiarism.db```
   
