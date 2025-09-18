@@ -1,61 +1,35 @@
-const path = require('path');
-const fs = require('fs');
-const stringSimilarity = require('string-similarity');
+const fs = require("fs").promises;
+const path = require("path");
+const stringSimilarity = require("string-similarity");
 
-function compareFiles() {
-// get a list of path names
-  const files = fs.readdirSync('uploads/');
-  // sorts files in order of most recent.
-  files.sort(function (x, y) {
-    return fs.statSync('uploads/' + y).mtime.getTime() -
-    fs.statSync('uploads/' + x).mtime.getTime();
-  });
-  // console.log(files);
+async function compareFiles() {
+  const uploadsDir = "uploads";
 
-  // sorting files into most recent
-
-
-  // console.log(files);
-
-  const pathArr = [];
-  for (let i = 0; i < files.length; i++) {
-    const filePath = path.join(files[i]);
-    pathArr[i] = 'uploads' + '/' + filePath;
-  // console.log(pathArr[i]);
+  const files = await fs.readdir(uploadsDir);
+  if (files.length < 2) {
+    throw new Error("Need at least 2 files to compare.");
   }
 
-  // readfile sync in loop using the path array to create a list of files data in strin
-  const dataArr = [];
-  for (let i = 0; i < files.length; i++) {
-    const dataString = fs.readFileSync(pathArr[i], 'utf-8');
-    dataArr[i] = dataString;
-  }
+  const filesWithStats = await Promise.all(
+    files.map(async (file) => {
+      const filePath = path.join(uploadsDir, file);
+      const stat = await fs.stat(filePath);
+      return { filePath, mtime: stat.mtime };
+    })
+  );
 
+  // Sort newest → oldest
+  filesWithStats.sort((a, b) => b.mtime - a.mtime);
 
-  const original = dataArr.shift();
-  // dataArr.shift();
-  const targetFiles = dataArr;
+  // Read contents
+  const contents = await Promise.all(
+    filesWithStats.map((f) => fs.readFile(f.filePath, "utf8"))
+  );
 
-  // the most recent file is compared against the remaining files
-  // console.log('The original file: ' + '\n' + original);
-  const similarity = stringSimilarity.findBestMatch(original, targetFiles);
-  // console.log(similarity);
-  // used to delete all files after
-  // deleteFiles(pathArr);
-  return similarity;
+  const [original, ...targetFiles] = contents;
+
+  return stringSimilarity.findBestMatch(original, targetFiles);
 }
-
-function deleteFiles(path) {
-  for (let i = 0; i < path.length; i++) {
-    fs.unlink(path[i], (err) => {
-      if (err) {
-        console.error(err);
-      }
-
-      // file removed
-    });
-  }
-}
-// compareFiles();
 
 module.exports = compareFiles;
+
